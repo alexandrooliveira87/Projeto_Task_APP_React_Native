@@ -1,4 +1,6 @@
-const Tarefas = [
+// components/tarefasIniciais.js
+
+const TarefasIniciais = [
   {
     nome: "Comprar leite",
     descricao: "Comprar 2 litros de leite no supermercado",
@@ -25,4 +27,4 @@ const Tarefas = [
   }
 ];
 
-export default Tarefas;
+export default TarefasIniciais;

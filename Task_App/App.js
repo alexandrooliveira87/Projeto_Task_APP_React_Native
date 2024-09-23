@@ -1,16 +1,21 @@
 import React, { useState } from 'react';
-import { View, Text, Button } from 'react-native';
+import { View, Text, TouchableOpacity } from 'react-native';
 import Aba from './components/Aba';
 import ListaDeTarefas from './components/ListaDeTarefas';
 import ModalNovaTarefa from './components/ModalNovaTarefa';
 import styles from './styles';
-import TarefasIniciais from './components/tarefasIniciais'; // Importando as tarefas iniciais
+import TarefasIniciais from './components/tarefasIniciais';
+import { format } from 'date-fns';
+import { ptBR } from 'date-fns/locale';
 
 export default function App() {
   const [tarefas, setTarefas] = useState(TarefasIniciais);
   const [novaTarefa, setNovaTarefa] = useState('');
   const [modalVisivel, setModalVisivel] = useState(false);
   const [abaAtiva, setAbaAtiva] = useState('Todas');
+
+  // Função para obter a data no formato "Segunda-feira, 16 setembro"
+  const dataAtual = format(new Date(), "eeee, dd 'de' MMMM", { locale: ptBR });
 
   const adicionarTarefa = () => {
     if (novaTarefa.length > 0) {
@@ -34,6 +39,8 @@ export default function App() {
   return (
     <View style={styles.container}>
       <Text style={styles.cabecalho}>Tarefas de Hoje</Text>
+      <Text style={styles.dataTexto}>{dataAtual}</Text>
+
       <Aba abaAtiva={abaAtiva} setAbaAtiva={setAbaAtiva} />
 
       <ListaDeTarefas
@@ -41,7 +48,10 @@ export default function App() {
         completarTarefa={completarTarefa}
       />
 
-      <Button title="+ Nova Tarefa" onPress={() => setModalVisivel(true)} />
+      {/* Certifique-se de que o texto do botão está dentro de um componente <Text> */}
+      <TouchableOpacity style={styles.botaoNovaTarefa} onPress={() => setModalVisivel(true)}>
+        <Text style={styles.botaoTexto}>+ NOVA TAREFA</Text>
+      </TouchableOpacity>
 
       <ModalNovaTarefa
         modalVisivel={modalVisivel}

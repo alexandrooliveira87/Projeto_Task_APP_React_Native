@@ -1,5 +1,5 @@
 import React from 'react';
-import { Modal, View, Text, TextInput, Button } from 'react-native';
+import { Modal, View, Text, TextInput, TouchableOpacity } from 'react-native';
 import styles from '../styles';
 
 export default function ModalNovaTarefa({
@@ -10,7 +10,7 @@ export default function ModalNovaTarefa({
   adicionarTarefa,
 }) {
   return (
-    <Modal visible={modalVisivel} animationType="slide">
+    <Modal visible={modalVisivel} animationType="slide" transparent={true}>
       <View style={styles.modalView}>
         <Text style={styles.modalTexto}>Nova Tarefa</Text>
         <TextInput
@@ -19,8 +19,16 @@ export default function ModalNovaTarefa({
           value={novaTarefa}
           onChangeText={setNovaTarefa}
         />
-        <Button title="Adicionar Tarefa" onPress={adicionarTarefa} />
-        <Button title="Cancelar" color="red" onPress={() => setModalVisivel(false)} />
+
+        {/* Botão para adicionar a tarefa */}
+        <TouchableOpacity style={styles.modalBotaoAdicionar} onPress={adicionarTarefa}>
+          <Text style={styles.botaoTextoModal}>Adicionar Tarefa</Text>
+        </TouchableOpacity>
+
+        {/* Botão para cancelar e fechar o modal */}
+        <TouchableOpacity style={styles.modalBotaoCancelar} onPress={() => setModalVisivel(false)}>
+          <Text style={styles.botaoTextoModal}>Cancelar</Text>
+        </TouchableOpacity>
       </View>
     </Modal>
   );
