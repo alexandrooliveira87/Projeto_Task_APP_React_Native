@@ -114,6 +114,7 @@ export default StyleSheet.create({
     marginBottom: 20,
     borderRadius: 8,
     backgroundColor: '#f9f9f9',
+    color: '#333',
   },
   modalBotaoAdicionar: {
     backgroundColor: '#007BFF',
@@ -136,4 +137,10 @@ export default StyleSheet.create({
     fontSize: 16,
     fontWeight: 'bold',
   },
+  scrollContainer: {
+    flex: 1,  // Faz o scroll ocupar o espaço da tela
+  },
+  listaDeTarefas: {
+    paddingBottom: 20, // Adiciona espaço no fim da lista
+  }
 });
