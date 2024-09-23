@@ -166,5 +166,15 @@ export default StyleSheet.create({
   },
   listaDeTarefas: {
     paddingBottom: 20, // Adiciona espaço no fim da lista
-  }
+  },
+  inputFiltro: {
+    width: '100%',
+    padding: 10,
+    borderRadius: 10,
+    backgroundColor: '#f0f0f0',
+    borderWidth: 1,
+    borderColor: '#ddd',
+    marginBottom: 20,
+    fontSize: 16,
+  },
 });
