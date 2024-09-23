@@ -1,7 +1,7 @@
 // components/ModalNovaTarefa.js
 import React, { useState } from 'react';
 import { Modal, View, Text, TextInput, TouchableOpacity } from 'react-native';
-import DateTimePicker from '@react-native-community/datetimepicker'; // Biblioteca para selecionar a data
+import DateTimePicker from '@react-native-community/datetimepicker';
 import styles from '../styles';
 
 export default function ModalNovaTarefa({
@@ -14,11 +14,10 @@ export default function ModalNovaTarefa({
   const [dataConclusao, setDataConclusao] = useState(new Date());
   const [mostrandoCalendario, setMostrandoCalendario] = useState(false);
 
-  // Função para lidar com a mudança da data de conclusão
   const onChangeData = (event, selectedDate) => {
     const currentDate = selectedDate || dataConclusao;
-    setMostrandoCalendario(false); // Fecha o calendário após a seleção
-    setDataConclusao(currentDate); // Atualiza o estado com a data selecionada
+    setMostrandoCalendario(false);
+    setDataConclusao(currentDate);
   };
 
   const handleAdicionarTarefa = () => {
@@ -26,8 +25,8 @@ export default function ModalNovaTarefa({
       adicionarTarefa({
         titulo,
         descricao,
-        dataConclusao: dataConclusao.toLocaleDateString(), // Formata a data de conclusão
-        status: 'Aberta'
+        dataConclusao: dataConclusao.toLocaleDateString(),
+        status: 'Aberta',
       });
       setTitulo('');
       setDescricao('');
@@ -36,52 +35,53 @@ export default function ModalNovaTarefa({
   };
 
   return (
-    <Modal visible={modalVisivel} animationType="slide" transparent={true}>
-      <View style={styles.modalView}>
-        <Text style={styles.modalTexto}>Nova Tarefa</Text>
+    <Modal visible={modalVisivel} animationType="fade" transparent={true}>
+      <View style={styles.modalContainer}>
+        <View style={styles.modalView}>
+          <Text style={styles.modalTitulo}>Nova Tarefa</Text>
 
-        {/* Input para o Título */}
-        <TextInput
-          style={styles.input}
-          placeholder="Título da tarefa"
-          value={titulo}
-          onChangeText={setTitulo}
-        />
-
-        {/* Input para a Descrição */}
-        <TextInput
-          style={styles.input}
-          placeholder="Descrição da tarefa"
-          value={descricao}
-          onChangeText={setDescricao}
-        />
-
-        {/* Botão para exibir o calendário */}
-        <TouchableOpacity onPress={() => setMostrandoCalendario(true)}>
-          <Text style={styles.input}>
-            {dataConclusao ? `Data de Conclusão: ${dataConclusao.toLocaleDateString()}` : 'Selecione a Data de Conclusão'}
-          </Text>
-        </TouchableOpacity>
-
-        {/* Exibe o DateTimePicker para selecionar a data */}
-        {mostrandoCalendario && (
-          <DateTimePicker
-            value={dataConclusao}
-            mode="date"
-            display="default"
-            onChange={onChangeData}
+          {/* Input para o Título */}
+          <TextInput
+            style={styles.inputModerno}
+            placeholder="Título da tarefa"
+            value={titulo}
+            onChangeText={setTitulo}
           />
-        )}
 
-        {/* Botão para adicionar a tarefa */}
-        <TouchableOpacity style={styles.modalBotaoAdicionar} onPress={handleAdicionarTarefa}>
-          <Text style={styles.botaoTextoModal}>Adicionar Tarefa</Text>
-        </TouchableOpacity>
+          {/* Input para a Descrição */}
+          <TextInput
+            style={styles.inputModerno}
+            placeholder="Descrição da tarefa"
+            value={descricao}
+            onChangeText={setDescricao}
+          />
 
-        {/* Botão para cancelar e fechar o modal */}
-        <TouchableOpacity style={styles.modalBotaoCancelar} onPress={() => setModalVisivel(false)}>
-          <Text style={styles.botaoTextoModal}>Cancelar</Text>
-        </TouchableOpacity>
+          {/* Botão para exibir o calendário */}
+          <TouchableOpacity onPress={() => setMostrandoCalendario(true)}>
+            <Text style={styles.inputModerno}>
+              {dataConclusao ? `Data de Conclusão: ${dataConclusao.toLocaleDateString()}` : 'Selecione a Data de Conclusão'}
+            </Text>
+          </TouchableOpacity>
+
+          {mostrandoCalendario && (
+            <DateTimePicker
+              value={dataConclusao}
+              mode="date"
+              display="default"
+              onChange={onChangeData}
+            />
+          )}
+
+          {/* Botão para adicionar a tarefa */}
+          <TouchableOpacity style={styles.botaoAdicionar} onPress={handleAdicionarTarefa}>
+            <Text style={styles.botaoTexto}>Adicionar Tarefa</Text>
+          </TouchableOpacity>
+
+          {/* Botão para cancelar e fechar o modal */}
+          <TouchableOpacity style={styles.botaoCancelar} onPress={() => setModalVisivel(false)}>
+            <Text style={styles.botaoTexto}>Cancelar</Text>
+          </TouchableOpacity>
+        </View>
       </View>
     </Modal>
   );
