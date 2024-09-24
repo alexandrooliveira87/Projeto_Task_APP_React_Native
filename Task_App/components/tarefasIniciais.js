@@ -2,27 +2,15 @@
 
 const TarefasIniciais = [
   {
-    nome: "Comprar leite",
-    descricao: "Comprar 2 litros de leite no supermercado",
-    data: "2024-09-23",
-    status: "Aberta",
-  },
-  {
-    nome: "Estudar React Native",
-    descricao: "Revisar hooks e componentes",
+    nome: "Revisar Código do Projeto",
+    descricao: "Revisar e otimizar o código do projeto de farmácia online, focando na performance e organização.",
     data: "2024-09-24",
     status: "Aberta",
   },
   {
-    nome: "Enviar relatório",
-    descricao: "Enviar relatório semanal para o cliente",
-    data: "2024-09-22",
-    status: "Concluída",
-  },
-  {
-    nome: "Agendar consulta",
-    descricao: "Marcar consulta médica para o próximo mês",
-    data: "2024-09-25",
+    nome: "Implementar Funcionalidade de Pesquisa",
+    descricao: "Adicionar funcionalidade de pesquisa no aplicativo React Native, garantindo que o resultado anterior apareça quando o termo for apagado.",
+    data: "2024-09-24",
     status: "Aberta",
   }
 ];

@@ -18,6 +18,14 @@ Task_App é uma aplicação de gerenciamento de tarefas desenvolvida em **React 
 - **Date-Fns:** Biblioteca para formatação de datas.
 - **JavaScript ES6:** Linguagem de programação utilizada.
 
+## Telas
+
+![alt text](image-1.png)
+
+![alt text](image-2.png)
+
+![alt text](image-3.png)
+
 ## Instalação
 
 ### Pré-requisitos

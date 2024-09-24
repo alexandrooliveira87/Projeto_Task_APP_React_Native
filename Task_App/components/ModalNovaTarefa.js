@@ -52,7 +52,7 @@ export default function ModalNovaTarefa({ modalVisivel, setModalVisivel, adicion
 
           <TouchableOpacity onPress={() => setMostrandoCalendario(true)}>
             <Text style={styles.inputModerno}>
-              {dataConclusao ? `Data de Conclusão: ${dataConclusao.toLocaleDateString()}` : 'Selecione a Data de Conclusão'}
+              {dataConclusao ? `Previsão de Conclusão: ${dataConclusao.toLocaleDateString()}` : 'Selecione a Data de Conclusão'}
             </Text>
           </TouchableOpacity>
 
