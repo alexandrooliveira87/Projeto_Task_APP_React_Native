@@ -10,7 +10,7 @@ import { format } from 'date-fns';
 import { ptBR } from 'date-fns/locale';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-// Função para gerar um ID único sem usar uuid
+// Função para gerar um ID único
 const gerarIDUnico = () => {
   return Date.now().toString() + Math.random().toString(36).substr(2, 9);
 };
@@ -58,11 +58,12 @@ export default function App() {
   const adicionarTarefa = (novaTarefaObj) => {
     if (novaTarefaObj.titulo && novaTarefaObj.descricao) {
       const nova = {
-        id: gerarIDUnico(), // Gerando um ID único
+        id: gerarIDUnico(),
         nome: novaTarefaObj.titulo,
         descricao: novaTarefaObj.descricao,
         data: novaTarefaObj.dataConclusao,
-        status: 'Aberta'
+        status: 'Aberta',
+        dataConclusao: null // Adicionando campo para data de conclusão
       };
       setTarefas([...tarefas, nova]);
       setModalVisivel(false);
@@ -74,11 +75,15 @@ export default function App() {
   const completarTarefa = (id) => {
     const tarefasAtualizadas = tarefas.map(tarefa => {
       if (tarefa.id === id) {
-        return { ...tarefa, status: 'Concluída' };
+        return { 
+          ...tarefa, 
+          status: 'Concluída', 
+          dataConclusao: format(new Date(), 'dd/MM/yyyy HH:mm:ss') // Adiciona data de conclusão formatada
+        };
       }
       return tarefa;
     });
-    setTarefas(tarefasAtualizadas); // Atualizando o array original de tarefas
+    setTarefas(tarefasAtualizadas);
   };
 
   // Filtrar tarefas pelo título, descrição e aba ativa
@@ -87,8 +92,15 @@ export default function App() {
       const tituloIncluido = tarefa.nome.toLowerCase().includes(filtro.toLowerCase());
       const descricaoIncluida = tarefa.descricao.toLowerCase().includes(filtro.toLowerCase());
       const abaFiltrada = abaAtiva === 'Todas' || tarefa.status === abaAtiva;
+
       return (tituloIncluido || descricaoIncluida) && abaFiltrada;
     });
+
+    // Ordenar as tarefas concluídas pela data de conclusão (mais novas primeiro)
+    if (abaAtiva === 'Concluída') {
+      tarefasFiltradas.sort((a, b) => new Date(b.dataConclusao) - new Date(a.dataConclusao));
+    }
+
     setTarefasFiltradas(tarefasFiltradas);
   }, [filtro, tarefas, abaAtiva]);
 

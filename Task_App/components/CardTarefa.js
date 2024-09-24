@@ -2,21 +2,32 @@
 import React from 'react';
 import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
 
-export default function CardTarefa({ titulo, descricao, horario, concluida, onConcluir }) {
+export default function CardTarefa({ titulo, descricao, horario, concluida, dataConclusao, onConcluir }) {
   return (
     <View style={styles.card}>
       <View style={styles.infoContainer}>
         <Text style={concluida ? styles.tituloConcluido : styles.titulo}>{titulo}</Text>
         <Text style={styles.descricao}>{descricao}</Text>
         <Text style={styles.horario}>{horario}</Text>
+
+        {/* Exibir a data de conclusão se a tarefa estiver concluída */}
+        {concluida && (
+          <Text style={styles.dataConclusao}>Concluída em: {dataConclusao}</Text>
+        )}
       </View>
-      <TouchableOpacity
-        style={[styles.botaoConcluir, concluida && { backgroundColor: 'gray' }]}
-        onPress={!concluida ? onConcluir : null}
-        disabled={concluida}
-      >
-        <Text style={styles.botaoTexto}>{concluida ? '✔️' : 'Concluir'}</Text>
-      </TouchableOpacity>
+
+      {!concluida && (
+        <TouchableOpacity
+          style={styles.botaoConcluir}
+          onPress={onConcluir}
+        >
+          <Text style={styles.botaoTexto}>Concluir</Text>
+        </TouchableOpacity>
+      )}
+
+      {concluida && (
+        <Text style={styles.botaoTextoConcluido}>✔️</Text>
+      )}
     </View>
   );
 }
@@ -59,6 +70,12 @@ const styles = StyleSheet.create({
     fontSize: 12,
     color: '#999',
   },
+  dataConclusao: {
+    fontSize: 12,
+    color: '#28a745',
+    marginTop: 5,
+    fontStyle: 'italic',
+  },
   botaoConcluir: {
     backgroundColor: '#28a745',
     padding: 10,
@@ -67,5 +84,10 @@ const styles = StyleSheet.create({
   botaoTexto: {
     color: '#fff',
     fontWeight: 'bold',
+  },
+  botaoTextoConcluido: {
+    color: '#28a745',
+    fontWeight: 'bold',
+    fontSize: 20,
   },
 });

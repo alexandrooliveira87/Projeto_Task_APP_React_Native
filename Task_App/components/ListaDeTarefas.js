@@ -9,12 +9,13 @@ export default function ListaDeTarefas({ tarefas, completarTarefa }) {
     <ScrollView style={styles.scrollContainer} contentContainerStyle={styles.listaDeTarefas}>
       {tarefas.map((tarefa) => (
         <CardTarefa
-          key={tarefa.id} // Agora usando `id` como chave
+          key={tarefa.id}
           titulo={tarefa.nome}
           descricao={tarefa.descricao}
           horario={`Previsão da Conclusão, ${tarefa.data}`}
           concluida={tarefa.status === 'Concluída'}
-          onConcluir={() => completarTarefa(tarefa.id)} // Usando o `id` para concluir a tarefa
+          dataConclusao={tarefa.dataConclusao} // Passando a data de conclusão
+          onConcluir={() => completarTarefa(tarefa.id)}
         />
       ))}
     </ScrollView>
