@@ -10,7 +10,11 @@ export default function CardTarefa({ titulo, descricao, horario, concluida, onCo
         <Text style={styles.descricao}>{descricao}</Text>
         <Text style={styles.horario}>{horario}</Text>
       </View>
-      <TouchableOpacity style={styles.botaoConcluir} onPress={onConcluir}>
+      <TouchableOpacity
+        style={[styles.botaoConcluir, concluida && { backgroundColor: 'gray' }]}
+        onPress={!concluida ? onConcluir : null}
+        disabled={concluida}
+      >
         <Text style={styles.botaoTexto}>{concluida ? '✔️' : 'Concluir'}</Text>
       </TouchableOpacity>
     </View>
